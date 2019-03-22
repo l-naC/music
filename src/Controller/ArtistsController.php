@@ -7,10 +7,15 @@ use Cake\Http\Exception\NotFoundException;
 
 class ArtistsController extends AppController
 {
+    public $paginate = [
+        'limit' => 2,
+        'order' => [
+            'Artists.pseudonym' => 'asc'
+        ]
+    ];
 	public function index()
     {
-    	$artists = $this->Artists->find();
-    	//$artists = $this->paginate($this->Artists);
+    	$artists = $this->paginate($this->Artists);
         $this->set(compact('artists'));
     }
 

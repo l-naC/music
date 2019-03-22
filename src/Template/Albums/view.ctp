@@ -31,7 +31,14 @@
 	<?php if(!empty($album->style)) { echo $album->style; }else{ echo 'pas définie'; }  ?>
 </p>
 <p>
-	<iframe src="https://open.spotify.com/embed/album/<?= $album->spotify ?>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+	<a href="<?= $album->spotify ?>">Lien spotify</a>
+</p>
+<p>
+	<?php 
+		$lien_bdd = strstr($album->spotify, 'album/');
+		$lien = 'https://open.spotify.com/embed/'.$lien_bdd;
+	?>
+	<iframe src="<?= $lien ?>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </p>
 <p>
 	<span class="label">Fiche créée le :</span>

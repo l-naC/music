@@ -27,4 +27,21 @@ class BookmarksController extends AppController
         }
         $this->Flash->error('Planté');
     }
+
+    public function delete($id, $user_id)
+    {
+        if($this->request->is(['post', 'delete'])){
+            $bookmark = $this->Bookmarks->get($id);
+            
+            if ($this->Bookmarks->delete($bookmark)) {
+                $this->Flash->success('Supprimé');
+                return $this->redirect(['controller' => 'users', 'action' => 'view', $user_id]);
+            }else{
+                $this->Flash->error('Supprimession planté');
+                return $this->redirect(['controller' => 'users', 'action' => 'view', $user_id]);
+            }
+        }else{
+            throw new NotFoundException('Methode interdite (c\'est pas beau de tricher)');   
+        }
+    }
 }

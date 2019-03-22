@@ -36,10 +36,14 @@
 	<?php if(!empty($artist->country)) { echo $artist->country; }else{ echo 'inconnue'; }  ?>
 </p>
 <p>
-	<a href="https://open.spotify.com/artist/<?= $artist->spotify ?>">Lien spotify</a>
+	<a href="<?= $artist->spotify ?>">Lien spotify</a>
 </p>
 <p>
-	<iframe src="https://open.spotify.com/embed/artist/<?= $artist->spotify ?>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+	<?php 
+		$lien_bdd = strstr($artist->spotify, 'artist/');
+		$lien = 'https://open.spotify.com/embed/'.$lien_bdd;
+	?>
+	<iframe src="<?= $lien ?>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </p>
 <p>
 	<span class="label">Fiche créée le :</span>

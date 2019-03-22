@@ -14,7 +14,11 @@
 <?php 
 foreach ($user->bookmarks as $bookmark): ?>
 <ul>
-	<li><?php echo $bookmark->artist->pseudonym; ?></li>
+	<li><?php echo $bookmark->artist->pseudonym; ?>
+	<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
+		<span><?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id, $user->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?></span>
+	<?php } ?>
+	</li>
 </ul>	
 <?php endforeach ?>
 

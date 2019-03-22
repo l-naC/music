@@ -1,9 +1,9 @@
 <?php //file : src/Templates/Artists/index.ctp ?>
-<p>Il y a <?= $artists->count(); ?> artist(s)</p>
+<p>Il y a <?= $artists->count(); ?> artiste(s)</p>
 
 <table>
 	<tr>
-		<th>Artist</th>
+		<th>Artiste</th>
 		<th>Style</th>
 		<th>Début</th>
 	</tr>
@@ -15,3 +15,24 @@
 	</tr>
 	<?php endforeach; ?>
 </table>
+<div class="paging">
+	<?php 
+		echo $this->Paginator->first("First");
+		echo $this->Paginator->numbers();
+		echo $this->Paginator->last("Last");
+	?>
+</div>
+
+
+<h2>Les plus populaire et mis en favori</h2>
+<ul>
+	<?php 
+	var_dump($result);
+	?>
+	<li></li>
+</ul>
+
+<h2>Les challengers</h2>
+<ul>
+	<li></li>
+</ul>
