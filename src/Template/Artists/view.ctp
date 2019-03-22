@@ -32,6 +32,9 @@
 	<a href="https://open.spotify.com/artist/<?= $artist->spotify ?>">Lien spotify</a>
 </p>
 <p>
+	<iframe src="https://open.spotify.com/embed/artist/<?= $artist->spotify ?>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+</p>
+<p>
 	<span class="label">Fiche créée le :</span>
 	<?php echo $artist->created->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
@@ -39,9 +42,12 @@
 	<span class="label">Fiche modifiée le :</span>
 	<?php echo $artist->modified->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
-<h2>Albums</h2>
+<div>
+	<h2>Albums</h2>
+	<?= $this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id]); ?>
+</div>
+
 <?php 
-var_dump($artist->albums);
 if (empty($artist->albums)) {
 	echo "<p>Aucun album</p>";
 }else foreach ($artist->albums as $album) { ?>

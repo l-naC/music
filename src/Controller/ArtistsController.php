@@ -16,7 +16,9 @@ class ArtistsController extends AppController
 
     public function view($id)
     {
-        $artist = $this->Artists->get($id);
+        $artist = $this->Artists->get($id, [
+            'contain' => ['Albums']
+        ]);
 
         $albums = $this->Artists->Albums->find();
 

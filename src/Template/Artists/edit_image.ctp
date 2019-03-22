@@ -5,7 +5,7 @@
 	<?= $this->Form->control('picture', ['type' => 'file', 'label' => 'Affiche']) ?>
 	<figure>
 		<?php if (!empty($artist->picture)) { ?>
-			<?= $this->Html->image('../data/pictures/'.$artist->picture, ['alt' => 'Affiche de :'.$artist->title]) ?>
+			<?= $this->Html->image('../data/pictures/'.$artist->picture, ['alt' => 'Affiche de :'.$artist->pseudonym]) ?>
 		<?php }else{ ?>
 			<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
 		<?php } ?>

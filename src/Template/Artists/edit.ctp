@@ -1,4 +1,4 @@
-<?php //file : src/Templates/Movies/edit.ctp  ?>
+<?php //file : src/Templates/Artists/edit.ctp  ?>
 
 <?= $this->Form->create($artist) ?>
 	<h1>Modifier un artist</h1>
