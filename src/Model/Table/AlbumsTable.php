@@ -15,7 +15,9 @@ class AlbumsTable extends Table
 
         $this->belongsTo('Artists', [
             'foreignKey' => 'artist_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
+            'dependent' => true,
+            'cascadeCallbacks' => true
         ]);
     }
 

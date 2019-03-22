@@ -34,7 +34,6 @@ class AlbumsController extends AppController
 
             }else{
                 $new->cover = null;
-                $this->Flash->error('Ce format de fichier n\'est pas autorisé');
             }
             $new->artist_id = $artist_id;
             if ($this->Albums->save($new)) {

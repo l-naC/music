@@ -42,10 +42,8 @@ class ArtistsController extends AppController
                 $new->picture = $name;
 
                 move_uploaded_file($this->request->getData('picture')['tmp_name'], $address);
-
             }else{
                 $new->picture = null;
-                $this->Flash->error('Ce format de fichier n\'est pas autorisé');
             }
             if ($this->Artists->save($new)) {
                 $this->Flash->success('Ok');

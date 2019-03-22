@@ -10,12 +10,19 @@
 	<?php } ?>
 	<figcaption>
 		Affiche de : <?= $artist->pseudonym ?>
-		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $artist->id]); ?>
-		<?php if (!empty($artist->picture)) { ?>
-		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette artist ?']); ?>
+		<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
+			<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $artist->id]); ?>
+			<?php if (!empty($artist->picture)) { ?>
+			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette artist ?']); ?>
+			<?php } ?>
 		<?php } ?>
 	</figcaption>
 </figure>
+<?php if($auth->user()) { ?>
+<div>
+	<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id]); ?>
+</div>
+<?php } ?>
 <p>
 	<span class="label">Artist :</span>
 	<?php echo $artist->pseudonym; ?>
@@ -44,7 +51,11 @@
 </p>
 <div>
 	<h2>Albums</h2>
-	<?= $this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id]); ?>
+	<?php 
+	if(($auth->user()) && ($auth->user('status')) == 'admin') {
+		echo $this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id]); 
+	} 
+	?>
 </div>
 
 <?php 
@@ -55,7 +66,10 @@ if (empty($artist->albums)) {
 		<p><?= $this->Html->link($album->title, ['controller' => 'albums', 'action' => 'view', $album->id]); ?></p>
 	</article>
 <?php } ?>
-<div class="row text-center">
-	<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link']); ?>
-	<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link']); ?>
-</div>
+
+<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
+	<div class="row text-center">
+		<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link']); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link']); ?>
+	</div>
+<?php } ?>

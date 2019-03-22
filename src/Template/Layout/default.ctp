@@ -37,8 +37,17 @@ $cakeDescription = 'Gestionnaire de music';
      <header>
         <h1><?= $this->Html->link('Artists !', ['controller' => 'artists', 'action' => 'index']) ?></h1>
         <nav>
-            <?= $this->Html->link('Liste des artist', ['controller' => 'artists', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'index') ? 'active' : '']) ?>
-            <?= $this->Html->link('Ajouter un artist', ['controller' => 'artists', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'add') ? 'active' : '']) ?>
+            <?= $this->Html->link('Liste des artistes', ['controller' => 'artists', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'index') ? 'active' : '']) ?>
+            <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
+            <?= $this->Html->link('Ajouter un artiste', ['controller' => 'artists', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'add') ? 'active' : '']) ?>
+            <?php } ?>
+            <?php if(!($auth->user())) { ?>
+                <?= $this->Html->link('Créer un compte', ['controller' => 'users', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'add') ? 'active' : '']) ?>
+                <?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'login') ? 'active' : '']) ?>
+            <?php } else { ?>
+                <?= $this->Html->link('Liste des utilisateurs', ['controller' => 'users', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'index') ? 'active' : '']) ?>
+                <?= $this->Html->link('Se deconnecter', ['controller' => 'users', 'action' => 'logout'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?>
+            <?php } ?>
         </nav>
     </header>
     <main>

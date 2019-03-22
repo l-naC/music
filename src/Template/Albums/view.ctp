@@ -10,9 +10,11 @@
 	<?php } ?>
 	<figcaption>
 		Affiche de : <?= $album->title ?>
+		<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
 		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $album->id]); ?>
-		<?php if (!empty($album->cover)) { ?>
-		<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette album ?']); ?>
+			<?php if (!empty($album->cover)) { ?>
+			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette album ?']); ?>
+			<?php } ?>
 		<?php } ?>
 	</figcaption>
 </figure>
@@ -39,7 +41,9 @@
 	<span class="label">Fiche modifiée le :</span>
 	<?php echo $album->modified->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
-<div class="row text-center">
-	<?= $this->Html->link('Edit', ['action' => 'edit', $album->id], ['class' => 'col-3 link']); ?>
-	<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette album ?', 'class' => 'col-3 link']); ?>
-</div>
+<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
+	<div class="row text-center">
+		<?= $this->Html->link('Edit', ['action' => 'edit', $album->id], ['class' => 'col-3 link']); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette album ?', 'class' => 'col-3 link']); ?>
+	</div>
+<?php } ?>
