@@ -1,11 +1,11 @@
 <?php
-//src/Model/Entity/Artist.php
+//src/Model/Entity/Album.php
 
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Artist extends Entity
+class Album extends Entity
 {
 	protected $_accessible = [
 		'*' => true, 

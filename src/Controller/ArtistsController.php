@@ -18,7 +18,9 @@ class ArtistsController extends AppController
     {
         $artist = $this->Artists->get($id);
 
-        $this->set(compact('artist'));
+        $albums = $this->Artists->Albums->find();
+
+        $this->set(compact('artist', 'albums'));
     }
 
     public function add()

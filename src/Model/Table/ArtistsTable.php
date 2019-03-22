@@ -11,7 +11,11 @@ class ArtistsTable extends Table
 	public function initialize(array $config)
     {
     	$this->addBehavior('Timestamp');
-        $this->addBehavior('Image');
+        $this->addBehavior('Artist');
+
+        $this->hasMany('Albums', [
+            'foreignKey' => 'artist_id'
+        ]);
     }
 
     public function validationDefault(Validator $v)

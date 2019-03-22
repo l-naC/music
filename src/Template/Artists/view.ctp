@@ -39,6 +39,16 @@
 	<span class="label">Fiche modifiée le :</span>
 	<?php echo $artist->modified->i18nFormat('dd/MM/yyyy HH:mm:ss'); ?>
 </p>
+<h2>Albums</h2>
+<?php 
+var_dump($artist->albums);
+if (empty($artist->albums)) {
+	echo "<p>Aucun album</p>";
+}else foreach ($artist->albums as $album) { ?>
+	<article class="comments">
+		<p><?= $this->Html->link($album->title, ['controller' => 'albums', 'action' => 'view', $album->id]); ?></p>
+	</article>
+<?php } ?>
 <div class="row text-center">
 	<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link']); ?>
 	<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link']); ?>
