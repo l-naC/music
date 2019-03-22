@@ -1,0 +1,252 @@
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 14px;
+}
+body {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* 250px + "largeur restante" */
+    grid-template-rows: 1fr;
+}
+header {
+    grid-column: 1; grid-row: 1;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+header h1 {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    background: #26bece;
+}
+header h1 a {
+    color: #fff;
+    text-decoration: none;
+}
+main {
+    grid-column: 2; grid-row: 1;
+    padding: 20px;
+    position: relative;
+}
+nav > *{
+    padding: 10px;
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+}
+nav span{
+    font-style: italic;
+    font-size: 0.9rem;
+    border-top: 1px solid #ccc;
+}
+nav a {
+    margin-top: 10px;
+}
+nav a.active{
+    color: #fff;
+    border-top: 1px solid #26bece;
+    border-bottom: 1px solid #26bece;
+}
+main > h1:first-child{
+    font-size: 2rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+main h1{
+    font-size: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+main h2{
+    font-size: 1.3rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+label,
+.label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+p,
+div.input{
+    margin-bottom: 20px;
+}
+button,
+.button{
+    text-decoration: none;
+    background: #26bece;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: none;
+    margin: 10px;
+}
+input,
+textarea{
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+
+.message{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    background: #66a1ff;
+    color: #000;
+    padding: 10px 15px;
+    margin: 15px;
+}
+.message.success{
+    background: #3aad44;
+}
+.message.error{
+    background: #cc2e2e;
+    color: #fff;
+}
+.message.hidden{
+    display: none;
+}
+
+figure{
+    position: relative;
+}
+figure img{
+    width: 50%;
+}
+figcaption{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    padding: 30px;
+    background:rgba(0,0,0,.6);
+    color: #fff;
+    transition: all 0.5s;
+    text-align: center;
+}
+
+figcaption a{
+    background-color: #26bece;
+    color: black;
+    text-decoration: none;
+    padding: 15px;
+    transition: all .3s;
+    border-radius: 5px;
+}
+
+figcaption a:hover{
+    color: white;
+}
+
+table {
+    border-radius: 10px;
+    width: 100%;
+    background-color: #26bece;
+    background: linear-gradient(-68deg, #ac32e4 , #26bece);
+}
+
+th, td {
+    font-weight: unset;
+    padding-right: 10px;
+}
+
+td {
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.4;
+    padding: 14px;
+}
+
+td a{
+    text-decoration: none;
+    color: #fff;
+}
+
+th {
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.4;
+    text-transform: uppercase;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.32);
+}
+
+td:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.link{
+    display: block;
+    padding: 1rem;
+    font-family: sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    transition: all .3s;
+    z-index: 1;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.link:after {
+    content: '';
+    display: block;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    left: 1rem;
+    background-color: #26bece;
+    border-radius: 5px;
+    transition: all 0.3s;
+    z-index: -1;
+}
+.link:hover {
+    color: white;
+}
+.link:hover:after {
+    right: 0;
+    left: 0;
+    height: 100%;
+}
+.connexion{
+    display: block;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    background-color: #26bece;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.connexion:hover {
+    color: white;
+}
+.text-margin{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: red;
+}
+.comments{
+    background: linear-gradient(-68deg, #ac32e4 , #26bece);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px;
+}
