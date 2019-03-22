@@ -23,7 +23,7 @@ class ImageBehavior extends Behavior
 		//on recree le chemin vers le fichier
         $address = WWW_ROOT.'data/picture/'.$entity->picture;
         //si le nom du fichier n'est pas vide et que le fichier existenn on le supprime
-        if (!empty($entity->poster) && file_exists($address)) {
+        if (!empty($entity->picture) && file_exists($address)) {
             unlink ($address);
         }
 
