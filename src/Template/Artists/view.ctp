@@ -1,7 +1,7 @@
 <?php //file : src/Templates/Artists/view.ctp 
 ?>
 <h1>Un artist</h1>
-
+<?= "<h2>".$result->count." personnes l'on mis en favori</h2>" ?>
 <figure>
 	<?php if (!empty($artist->picture)) { ?>
 		<?= $this->Html->image('../data/pictures/'.$artist->picture, ['alt' => 'Affiche de :'.$artist->pseudonym]) ?>

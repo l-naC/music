@@ -27,7 +27,16 @@ class ArtistsController extends AppController
 
         $albums = $this->Artists->Albums->find();
 
-        $this->set(compact('artist', 'albums'));
+        $query = $this->Artists->Bookmarks->find();
+        $query
+        ->select([
+            'count' => $query->func()->count('id')
+        ])
+        ->where(['artist_id' => $id]);
+
+        $result = $query->first();
+
+        $this->set(compact('artist', 'albums', 'result'));
     }
 
     public function add()
