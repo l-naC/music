@@ -24,22 +24,21 @@ foreach ($user->bookmarks as $bookmark): ?>
 
 <?php if(($auth->user()) && ($auth->user('id')) != $user->id) { ?>
 
-<h2>Favoris en commun</h2>
-<?php 
-var_dump($common->first());
-foreach ($common as $commons): ?>
-<ul>
-	<li><?php echo $commons->artist_id; ?>
-</ul>	
-<?php endforeach ?>
+	<h2>Favoris en commun</h2>
+	<?php 
+	foreach ($commons as $common): ?>
+	<ul>
+		<li><?php echo $common->artist->pseudonym; ?>
+	</ul>	
+	<?php endforeach ?>
 
-<h2>Ces artistes peuvent vous interesser</h2>
-<?php 
-foreach ($different as $differents): ?>
-<ul>
-	<li><?php echo $differents->artist_id; ?>
-</ul>	
-<?php endforeach ?>
+	<h2>Ces artistes peuvent vous interesser</h2>
+	<?php 
+	foreach ($differents as $different): ?>
+	<ul>
+		<li><?php echo $different->artist->pseudonym; ?>
+	</ul>	
+	<?php endforeach ?>
 
 <?php } ?>
 

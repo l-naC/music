@@ -35,13 +35,14 @@ class UsersController extends AppController
 
         $common = $this->Users->Bookmarks->find();
         $common
-        ->select('artist_id')
+        ->contain(['Artists'])
+        ->select()
         ->distinct()
         ->where(['artist_id IN' => $query])
         ->andWhere(['user_id' => $id])
-        ->group(['artist_id'])
-        ->contain(['Artists'])
-        ->all();
+        ->group(['artist_id']);
+
+        $commons = $common->all();
 
         /*Favori different*/
         $sql = $this->Users->Bookmarks->find();
@@ -51,27 +52,15 @@ class UsersController extends AppController
         $different = $this->Users->Bookmarks->find();
         $different
         ->contain(['Artists'])
-        ->select('artist_id')
+        ->select()
         ->distinct()
         ->where(['artist_id NOT IN' => $sql])
         ->andWhere(['user_id' => $id])
-        ->group(['artist_id'])
-        ->all();
+        ->group(['artist_id']);
 
+        $differents = $different->all();
 
-        $this->set(compact('user', 'bookmarks', 'common', 'different'));
-
-        /*->where(function ($exp, $q) {
-        return $exp->in('country_id', ['AFG', 'USA', 'EST']);
-        });*/
-        # WHERE country_id IN ('AFG', 'USA', 'EST')
-
-        //->where(['id IN' => $ids]);
-
-        //SELECT DISTINCT artist_id FROM bookmarks WHERE artist_id IN ( SELECT artist_id FROM bookmarks WHERE user_id=2 ) AND user_id=1 GROUP BY user_id
-
-        //SELECT DISTINCT artist_id FROM bookmarks WHERE artist_id NOT IN ( SELECT artist_id FROM bookmarks WHERE user_id=1 ) AND user_id=2
-
+        $this->set(compact('user', 'bookmarks', 'commons', 'differents'));
     }
 
     public function add()
