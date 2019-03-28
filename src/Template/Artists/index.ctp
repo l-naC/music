@@ -1,16 +1,17 @@
 <?php //file : src/Templates/Artists/index.ctp ?>
 <p>Il y a <?= $artists->count(); ?> artiste(s)</p>
 
+<h2>Liste</h2>
 <table>
 	<tr>
 		<th>Artiste</th>
-		<th>Style</th>
+		<th>Pays</th>
 		<th>Début</th>
 	</tr>
 	<?php foreach ($artists as $uneLigne) : ?>
 	<tr>
 		<td><?= $this->Html->link($uneLigne->pseudonym, ['action' => 'view', $uneLigne->id]); ?></td>
-		<td><?= (!empty($uneLigne->style)) ? $uneLigne->style : 'Pas définie' ?></td>
+		<td><?= (!empty($uneLigne->country)) ? $uneLigne->country : 'Pas définie' ?></td>
 		<td><?php echo $uneLigne->debut ?></td>
 	</tr>
 	<?php endforeach; ?>
@@ -24,17 +25,20 @@
 </div>
 
 <h2>Le top des artistes</h2>
-<?php foreach ($artists_pseudonym as $value): ?>
+<?php 
+foreach ($artists_pseudonym as $value): 
+?>
+
 <ul>
 	<li>
 		<figure>
 			<?php if (!empty($value->picture)) { ?>
-				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?>
+				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?><br>
 			<?php }else{ ?>
 				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
 			<?php } ?>
 			<figcaption>
-				Affiche de : <?= $value->pseudonym; ?>
+				<?= $value->pseudonym; ?>
 			</figcaption>
 		</figure>
 	</li>
@@ -44,7 +48,9 @@
 
 
 <h2>Les challengers</h2>
-<?php foreach ($notpopulars as $value): ?>
+<?php foreach ($notpopulars as $value):
+if($value->count < 2){
+?>
 <ul>
 	<li>
 		<figure>
@@ -54,9 +60,9 @@
 				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
 			<?php } ?>
 			<figcaption>
-				Affiche de : <?= $value->pseudonym; ?>
+				<?= $value->pseudonym; ?>
 			</figcaption>
 		</figure>
 	</li>
 </ul>	
-<?php endforeach ?>
+<?php } endforeach ?>

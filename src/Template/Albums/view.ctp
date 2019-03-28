@@ -30,9 +30,9 @@
 	<span class="label">Genre :</span>
 	<?php if(!empty($album->style)) { echo $album->style; }else{ echo 'pas définie'; }  ?>
 </p>
-<p>
+<div class="margin">
 	<a href="<?= $album->spotify ?>">Lien spotify</a>
-</p>
+</div>
 <p>
 	<?php 
 		$lien_bdd = strstr($album->spotify, 'album/');

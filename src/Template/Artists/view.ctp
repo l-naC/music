@@ -1,6 +1,6 @@
 <?php //file : src/Templates/Artists/view.ctp 
 ?>
-<h1>Un artist</h1>
+<h1>Un artiste</h1>
 <?= "<h2>".$result->count." personnes l'on mis en favori</h2>" ?>
 <figure>
 	<?php if (!empty($artist->picture)) { ?>
@@ -19,8 +19,8 @@
 	</figcaption>
 </figure>
 <?php if($auth->user()) { ?>
-<div>
-	<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id]); ?>
+<div class="margin">
+	<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add']); ?>
 </div>
 <?php } ?>
 <p>
@@ -35,9 +35,9 @@
 	<span class="label">Pays d'origine :</span>
 	<?php if(!empty($artist->country)) { echo $artist->country; }else{ echo 'inconnue'; }  ?>
 </p>
-<p>
+<div class="margin">
 	<a href="<?= $artist->spotify ?>">Lien spotify</a>
-</p>
+</div>
 <p>
 	<?php 
 		$lien_bdd = strstr($artist->spotify, 'artist/');
@@ -57,7 +57,7 @@
 	<h2>Albums</h2>
 	<?php 
 	if(($auth->user()) && ($auth->user('status')) == 'admin') {
-		echo $this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id]); 
+		echo "<div class='margin'>".$this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id], ['class' => 'link_add'])."</div>"; 
 	} 
 	?>
 </div>
@@ -72,7 +72,7 @@ if (empty($artist->albums)) {
 <?php } ?>
 
 <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
-	<div class="row text-center">
+	<div class="row">
 		<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link']); ?>
 		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link']); ?>
 	</div>

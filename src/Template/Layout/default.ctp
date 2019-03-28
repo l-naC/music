@@ -35,7 +35,11 @@ $cakeDescription = 'Gestionnaire de music';
 </head>
 <body>
      <header>
+        <?php if(!($auth->user())) { ?>
         <h1><?= $this->Html->link('Artists !', ['controller' => 'artists', 'action' => 'index']) ?></h1>
+        <?php } else { ?>
+        <h1><?= $this->Html->link($auth->user('pseudo'), ['controller' => 'users', 'action' => 'view', $auth->user('id'),$auth->user('id')], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?></h1>
+        <?php } ?>
         <nav>
             <?= $this->Html->link('Liste des artistes', ['controller' => 'artists', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'index') ? 'active' : '']) ?>
             <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
@@ -49,7 +53,6 @@ $cakeDescription = 'Gestionnaire de music';
                 <?= $this->Html->link('Se connecter', ['controller' => 'users', 'action' => 'login'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'login') ? 'active' : '']) ?>
             <?php } else { ?>
                 <?= $this->Html->link('Liste des utilisateurs', ['controller' => 'users', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'index') ? 'active' : '']) ?>
-                <?= $this->Html->link('Profil', ['controller' => 'users', 'action' => 'view', $auth->user('id'),$auth->user('id')], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?>
                 <?= $this->Html->link('Se deconnecter', ['controller' => 'users', 'action' => 'logout'], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?>
             <?php } ?>
         </nav>

@@ -10,14 +10,25 @@
 	<span class="label">Status :</span>
 	<?php echo $user->status; ?>
 </p>
-<h2>Favoris</h2>
+<h2>Favoris</h2> 
 <?php 
 foreach ($user->bookmarks as $bookmark): ?>
 <ul>
-	<li><?php echo $bookmark->artist->pseudonym; ?>
-	<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
-		<span><?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id, $user->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?></span>
-	<?php } ?>
+	<li>
+		<figure>
+			<?php if (!empty($bookmark->artist->picture)) { ?>
+				<?= $this->Html->image('../data/pictures/'.$bookmark->artist->picture, ['alt' => 'Affiche de :'.$bookmark->artist->pseudonym]) ?>
+			<?php }else{ ?>
+				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+			<?php } ?>
+			<figcaption>
+				<?= $bookmark->artist->pseudonym; ?>
+				<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
+					<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id, $user->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+				<?php } ?>
+			</figcaption>
+		</figure>
+			
 	</li>
 </ul>	
 <?php endforeach ?>

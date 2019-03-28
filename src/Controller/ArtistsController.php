@@ -26,7 +26,9 @@ class ArtistsController extends AppController
 
         $artists_pseudonym = array();
         foreach ($populars as $value){
-            $artists_pseudonym[] = $this->Artists->get($value->artist_id);
+            if ($value->count >=2) {
+                $artists_pseudonym[] = $this->Artists->get($value->artist_id);
+            }
         }
         
         $notpopular = $this->Artists->find();

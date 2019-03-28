@@ -69,6 +69,7 @@ main h2{
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 label,
 .label{
@@ -249,4 +250,56 @@ td:hover {
     padding: 5px;
     border-radius: 5px;
     margin: 10px;
+}
+
+ul{
+    width: 30%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+ul li figure{
+    border :2px solid #26bece;
+}
+ul li figure img{
+    width: 100%;
+}
+
+ul li figure figcaption{
+    width: 100%;
+}
+
+ul li figure figcaption a{
+    padding: 10px;
+}
+
+.link_add{
+    background-color: #26bece;
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    transition: all .3s;
+    border-radius: 5px;
+}
+
+.link_add:hover{
+    color: white;
+}
+
+.margin{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.margin a{
+    background-color: #26bece;
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    transition: all .3s;
+    border-radius: 5px;
+}
+
+.margin:hover{
+    color: white;
 }
