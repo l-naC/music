@@ -23,16 +23,40 @@
 	?>
 </div>
 
-
-<h2>Les plus populaire et mis en favori</h2>
+<h2>Le top des artistes</h2>
+<?php foreach ($artists_pseudonym as $value): ?>
 <ul>
-	<?php 
-	var_dump($result);
-	?>
-	<li></li>
-</ul>
+	<li>
+		<figure>
+			<?php if (!empty($value->picture)) { ?>
+				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?>
+			<?php }else{ ?>
+				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+			<?php } ?>
+			<figcaption>
+				Affiche de : <?= $value->pseudonym; ?>
+			</figcaption>
+		</figure>
+	</li>
+</ul>	
+<?php endforeach ?>
+
+
 
 <h2>Les challengers</h2>
+<?php foreach ($notpopulars as $value): ?>
 <ul>
-	<li></li>
-</ul>
+	<li>
+		<figure>
+			<?php if (!empty($value->picture)) { ?>
+				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?>
+			<?php }else{ ?>
+				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+			<?php } ?>
+			<figcaption>
+				Affiche de : <?= $value->pseudonym; ?>
+			</figcaption>
+		</figure>
+	</li>
+</ul>	
+<?php endforeach ?>

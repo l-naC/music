@@ -23,12 +23,22 @@ foreach ($user->bookmarks as $bookmark): ?>
 <?php endforeach ?>
 
 <?php if(($auth->user()) && ($auth->user('id')) != $user->id) { ?>
-
 	<h2>Favoris en commun</h2>
 	<?php 
 	foreach ($commons as $common): ?>
 	<ul>
-		<li><?php echo $common->artist->pseudonym; ?>
+		<li>
+			<figure>
+				<?php if (!empty($common->artist->picture)) { ?>
+					<?= $this->Html->image('../data/pictures/'.$common->artist->picture, ['alt' => 'Affiche de :'.$common->artist->pseudonym]) ?>
+				<?php }else{ ?>
+					<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+				<?php } ?>
+				<figcaption>
+					Affiche de : <?= $common->artist->pseudonym; ?>
+				</figcaption>
+			</figure>
+		</li>
 	</ul>	
 	<?php endforeach ?>
 
@@ -36,7 +46,18 @@ foreach ($user->bookmarks as $bookmark): ?>
 	<?php 
 	foreach ($differents as $different): ?>
 	<ul>
-		<li><?php echo $different->artist->pseudonym; ?>
+		<li>
+			<figure>
+				<?php if (!empty($different->artist->picture)) { ?>
+					<?= $this->Html->image('../data/pictures/'.$different->artist->picture, ['alt' => 'Affiche de :'.$different->artist->pseudonym]) ?>
+				<?php }else{ ?>
+					<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+				<?php } ?>
+				<figcaption>
+					Affiche de : <?= $different->artist->pseudonym; ?>
+				</figcaption>
+			</figure>
+		</li>
 	</ul>	
 	<?php endforeach ?>
 

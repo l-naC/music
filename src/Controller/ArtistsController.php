@@ -16,7 +16,30 @@ class ArtistsController extends AppController
 	public function index()
     {
     	$artists = $this->paginate($this->Artists);
-        $this->set(compact('artists'));
+
+        $popular = $this->Artists->Bookmarks->find();
+        $popular
+        ->select(['artist_id', 'count' => $popular->func()->count('*')])
+        ->group(['artist_id'])
+        ->order(['count' => 'DESC']);
+        $populars = $popular->all();
+
+        $artists_pseudonym = array();
+        foreach ($populars as $value){
+            $artists_pseudonym[] = $this->Artists->get($value->artist_id);
+        }
+        
+        $notpopular = $this->Artists->find();
+        $notpopular
+        ->select(['id', 'pseudonym', 'picture', 'count' => $notpopular->func()->count('Bookmarks.artist_id')])
+        ->leftJoinWith('Bookmarks')
+        ->group(['Bookmarks.artist_id'])
+        ->order(['count' => 'ASC']);
+
+        $notpopulars = $notpopular->all();
+
+
+        $this->set(compact('artists', 'notpopulars', 'artists_pseudonym'));
     }
 
     public function view($id)
@@ -27,16 +50,7 @@ class ArtistsController extends AppController
 
         $albums = $this->Artists->Albums->find();
 
-        $query = $this->Artists->Bookmarks->find();
-        $query
-        ->select([
-            'count' => $query->func()->count('id')
-        ])
-        ->where(['artist_id' => $id]);
-
-        $result = $query->first();
-
-        $this->set(compact('artist', 'albums', 'result'));
+        $this->set(compact('artist', 'albums'));
     }
 
     public function add()
