@@ -24,7 +24,7 @@
 	?>
 </div>
 
-<h2>Le top des artistes</h2>
+<h2>Le top 3 des artistes</h2>
 <?php 
 foreach ($artists_pseudonym as $value): 
 ?>
@@ -47,7 +47,7 @@ foreach ($artists_pseudonym as $value):
 
 
 
-<h2>Les challengers</h2>
+<h2>Le top 3 des challengers</h2>
 <?php foreach ($notpopulars as $value):
 if($value->count < 2){
 ?>

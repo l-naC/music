@@ -21,7 +21,8 @@ class ArtistsController extends AppController
         $popular
         ->select(['artist_id', 'count' => $popular->func()->count('*')])
         ->group(['artist_id'])
-        ->order(['count' => 'DESC']);
+        ->order(['count' => 'DESC'])
+        ->limit(3);
         $populars = $popular->all();
 
         $artists_pseudonym = array();
@@ -36,7 +37,8 @@ class ArtistsController extends AppController
         ->select(['id', 'pseudonym', 'picture', 'count' => $notpopular->func()->count('Bookmarks.artist_id')])
         ->leftJoinWith('Bookmarks')
         ->group(['Bookmarks.artist_id'])
-        ->order(['count' => 'ASC']);
+        ->order(['count' => 'ASC'])
+        ->limit(3);
 
         $notpopulars = $notpopular->all();
 
