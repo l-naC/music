@@ -8,7 +8,7 @@ use Cake\Http\Exception\NotFoundException;
 class ArtistsController extends AppController
 {
     public $paginate = [
-        'limit' => 2,
+        'limit' => 25,
         'order' => [
             'Artists.pseudonym' => 'asc'
         ]
@@ -38,7 +38,6 @@ class ArtistsController extends AppController
 
         $notpopulars = $notpopular->all();
 
-
         $this->set(compact('artists', 'notpopulars', 'artists_pseudonym'));
     }
 
@@ -50,7 +49,16 @@ class ArtistsController extends AppController
 
         $albums = $this->Artists->Albums->find();
 
-        $this->set(compact('artist', 'albums'));
+        $query = $this->Artists->Bookmarks->find();
+        $query
+        ->select([
+            'count' => $query->func()->count('id')
+        ])
+        ->where(['artist_id' => $id]);
+
+        $result = $query->first();
+
+        $this->set(compact('artist', 'albums', 'result'));
     }
 
     public function add()
