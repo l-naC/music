@@ -1,15 +1,21 @@
 <?php //file : src/Templates/Users/view.ctp 
 ?>
+<?php if ($user->pseudo != $auth->user('pseudo')) { ?>
 <h1>Un utilisateur</h1>
+<?php }else{ ?>
+<h1>Mon profil</h1>
+<?php } ?>
 
 <p>
 	<span class="label">Pseudo :</span>
 	<?php echo $user->pseudo; ?>
 </p>
+<?php if ($user->status == 'admin') { ?>
 <p>
 	<span class="label">Status :</span>
 	<?php echo $user->status; ?>
 </p>
+<?php } ?>
 <h2>Favoris</h2> 
 <?php if (!empty($user->bookmarks)) { ?>
 	<?php foreach ($user->bookmarks as $bookmark): ?>
