@@ -1,7 +1,7 @@
 <?php //file : src/Templates/Artists/view.ctp 
 ?>
 <h1>Un artiste</h1>
-<?= "<h2>".$result->count." personnes l'on mis en favori</h2>" ?>
+<?= "<h2>".$result->count." personnes l'on mit en favori</h2>" ?>
 <figure>
 	<?php if (!empty($artist->picture)) { ?>
 		<?= $this->Html->image('../data/pictures/'.$artist->picture, ['alt' => 'Affiche de :'.$artist->pseudonym]) ?>
@@ -23,7 +23,7 @@
 	<?php if (empty($bookmark)) { ?>
 		<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add']); ?>
 	<?php }else{ ?>
-		<?= $this->Form->postLink('Supprimer', ['url' => 'bookmarks', 'action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+		<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
 	<?php } ?>
 </div>
 <?php } ?>

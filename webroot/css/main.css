@@ -299,7 +299,43 @@ ul li figure figcaption a{
     transition: all .3s;
     border-radius: 5px;
 }
-
 .margin:hover{
     color: white;
+}
+
+/*Point cloud*/
+
+#cloud{
+    width: 80%;
+    margin: auto;
+    border: 1px solid #26bece;
+    border-radius: 5px;
+}
+
+#cloud ul{
+    margin: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+#cloud ul li{
+    margin: 30px;
+}
+
+#cloud ul li p{
+}
+
+#cloud div{
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+}
+
+#cloud div div{
+    margin: 20px;
+}
+
+#cloud div #point{
+    border-radius: 50%;
+    background: #26bece;
 }

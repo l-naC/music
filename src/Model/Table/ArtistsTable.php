@@ -19,10 +19,6 @@ class ArtistsTable extends Table
             'cascadeCallbacks' => true
         ]);
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
 
         $this->hasMany('Bookmarks', [
             'foreignKey' => 'artist_id',

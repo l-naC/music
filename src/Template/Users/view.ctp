@@ -33,6 +33,25 @@ foreach ($user->bookmarks as $bookmark): ?>
 </ul>	
 <?php endforeach ?>
 
+<h2>Nuage de point des genres favoris</h2>
+<div id="cloud">
+	<ul>
+		<?php foreach ($style as $key => $value): ?>
+		<li><?= $value->style ?> : <?= $value->count ?> point(s)</li>
+		<?php endforeach ?>
+	</ul>
+	
+	<div>
+		<?php foreach ($style as $key => $value): ?>
+		<div>
+			<p id="point" style="width: <?= $value->count ?>0px; height: <?= $value->count ?>0px;"></p>
+			<p><?= $value->count ?></p>
+		</div>
+		<?php endforeach ?>
+	</div>
+	
+</div>
+
 <?php if(($auth->user()) && ($auth->user('id')) != $user->id) { ?>
 	<h2>Favoris en commun</h2>
 	<?php 
@@ -71,6 +90,4 @@ foreach ($user->bookmarks as $bookmark): ?>
 		</li>
 	</ul>	
 	<?php endforeach ?>
-
 <?php } ?>
-
