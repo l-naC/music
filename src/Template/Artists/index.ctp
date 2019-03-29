@@ -25,32 +25,7 @@
 </div>
 
 <h2>Le top 3 des artistes</h2>
-<?php 
-foreach ($artists_pseudonym as $value): 
-?>
-
-<ul>
-	<li>
-		<figure>
-			<?php if (!empty($value->picture)) { ?>
-				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?><br>
-			<?php }else{ ?>
-				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
-			<?php } ?>
-			<figcaption>
-				<?= $value->pseudonym; ?>
-			</figcaption>
-		</figure>
-	</li>
-</ul>	
-<?php endforeach ?>
-
-
-
-<h2>Le top 3 des challengers</h2>
-<?php foreach ($notpopulars as $value):
-if($value->count < 2){
-?>
+<?php foreach ($artists_pseudonym as $value): ?>
 <ul>
 	<li>
 		<figure>
@@ -65,4 +40,40 @@ if($value->count < 2){
 		</figure>
 	</li>
 </ul>	
-<?php } endforeach ?>
+<?php endforeach ?>
+
+
+
+<h2>Le top 3 des challengers</h2>
+<?php foreach ($notpopular as $key => $value) { ?>
+<ul>
+	<li>
+		<figure>
+			<?php if (!empty($value->picture)) { ?>
+				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?>
+			<?php }else{ ?>
+				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+			<?php } ?>
+			<figcaption>
+				<?= $value->pseudonym; ?>
+			</figcaption>
+		</figure>
+	</li>
+</ul>
+<?php } ?>	
+<?php foreach ($notpopulars as $key => $value) { ?>
+<ul>
+	<li>
+		<figure>
+			<?php if (!empty($value->picture)) { ?>
+				<?= $this->Html->image('../data/pictures/'.$value->picture, ['alt' => 'Affiche de :'.$value->pseudonym]) ?>
+			<?php }else{ ?>
+				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+			<?php } ?>
+			<figcaption>
+				<?= $value->pseudonym; ?>
+			</figcaption>
+		</figure>
+	</li>
+</ul>		
+<?php } ?>

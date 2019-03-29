@@ -20,7 +20,11 @@
 </figure>
 <?php if($auth->user()) { ?>
 <div class="margin">
-	<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add']); ?>
+	<?php if (empty($bookmark)) { ?>
+		<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add']); ?>
+	<?php }else{ ?>
+		<?= $this->Form->postLink('Supprimer', ['url' => 'bookmarks', 'action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+	<?php } ?>
 </div>
 <?php } ?>
 <p>

@@ -35,12 +35,15 @@ $cakeDescription = 'Gestionnaire de music';
 </head>
 <body>
      <header>
-        <?php if(!($auth->user())) { ?>
-        <h1><?= $this->Html->link('Artists !', ['controller' => 'artists', 'action' => 'index']) ?></h1>
-        <?php } else { ?>
-        <h1><?= $this->Html->link($auth->user('pseudo'), ['controller' => 'users', 'action' => 'view', $auth->user('id'),$auth->user('id')], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?></h1>
-        <?php } ?>
+        <h1><?= $this->Html->link('Artists !', ['controller' => 'artists', 'action' => 'index']) ?><br>
+            <?php if($auth->user()) { ?>
+            <?= $this->Html->link('Bonjour '.$auth->user('pseudo'), ['controller' => 'users', 'action' => 'view', $auth->user('id'),$auth->user('id')], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?>
+            <?php } ?>
+        </h1>
         <nav>
+            <?php if($auth->user()) { ?>
+            <?= $this->Html->link('Votre profil', ['controller' => 'users', 'action' => 'view', $auth->user('id'),$auth->user('id')], [ 'class' => ($this->templatePath == 'Users' && $this->template == 'logout') ? 'active' : '']) ?>
+            <?php } ?>
             <?= $this->Html->link('Liste des artistes', ['controller' => 'artists', 'action' => 'index'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'index') ? 'active' : '']) ?>
             <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
             <?= $this->Html->link('Ajouter un artiste', ['controller' => 'artists', 'action' => 'add'], [ 'class' => ($this->templatePath == 'Artists' && $this->template == 'add') ? 'active' : '']) ?>

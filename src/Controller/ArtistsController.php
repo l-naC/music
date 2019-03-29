@@ -27,22 +27,31 @@ class ArtistsController extends AppController
 
         $artists_pseudonym = array();
         foreach ($populars as $value){
-            if ($value->count >=2) {
-                $artists_pseudonym[] = $this->Artists->get($value->artist_id);
-            }
+            $artists_pseudonym[] = $this->Artists->get($value->artist_id);
         }
-        
-        $notpopular = $this->Artists->find();
-        $notpopular
-        ->select(['id', 'pseudonym', 'picture', 'count' => $notpopular->func()->count('Bookmarks.artist_id')])
-        ->leftJoinWith('Bookmarks')
-        ->group(['Bookmarks.artist_id'])
+
+        $bookmarks = $this->Artists->Bookmarks->find();
+        $bookmarks_array = array();
+        foreach ($bookmarks as $value){
+            $bookmarks_array[] = $value->artist_id;
+        }
+        $notpopular = $this->Artists->find()->where(['id NOT IN' => $bookmarks_array])->order('rand()')->limit(3);
+        $count = 0;
+        foreach ($notpopular as $value ){ $count++; }
+
+        $challenger = $this->Artists->Bookmarks->find();
+        $challenger->select(['artist_id', 'count' => $challenger->func()->count('*')])
+        ->group(['artist_id'])
         ->order(['count' => 'ASC'])
-        ->limit(3);
+        ->limit(3-$count);
+        $challengers = $challenger->all();
 
-        $notpopulars = $notpopular->all();
+        $notpopulars = array();
+        foreach ($challengers as $value){
+            $notpopulars[] = $this->Artists->get($value->artist_id);
+        }
 
-        $this->set(compact('artists', 'notpopulars', 'artists_pseudonym'));
+        $this->set(compact('artists', 'notpopulars','notpopular', 'artists_pseudonym'));
     }
 
     public function view($id)
@@ -50,8 +59,6 @@ class ArtistsController extends AppController
         $artist = $this->Artists->get($id, [
             'contain' => ['Albums']
         ]);
-
-        $albums = $this->Artists->Albums->find();
 
         $query = $this->Artists->Bookmarks->find();
         $query
@@ -62,7 +69,12 @@ class ArtistsController extends AppController
 
         $result = $query->first();
 
-        $this->set(compact('artist', 'albums', 'result'));
+        $bookmarks = $this->Artists->Bookmarks->find();
+        $bookmarks->where(['user_id' => $this->Auth->user('id'), 'artist_id' => $id]);
+
+        $bookmark = $bookmarks->first();      
+
+        $this->set(compact('artist', 'result', 'bookmark'));
     }
 
     public function add()

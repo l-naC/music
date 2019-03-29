@@ -19,8 +19,9 @@ class UsersController extends AppController
         $this->set(compact('users'));
     }
 
-    public function view($id, $user_id)
+    public function view($id)
     {
+        $user_id = $this->Auth->user('id');
 
         $user = $this->Users->get($id, [
             'contain' => ['Bookmarks.Artists']
