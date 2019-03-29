@@ -37,11 +37,8 @@ class UsersController extends AppController
         $common = $this->Users->Bookmarks->find();
         $common
         ->contain(['Artists'])
-        ->select()
-        ->distinct()
         ->where(['artist_id IN' => $query])
-        ->andWhere(['user_id' => $id])
-        ->group(['artist_id']);
+        ->andWhere(['user_id' => $id]);
 
         $commons = $common->all();
 
@@ -53,11 +50,8 @@ class UsersController extends AppController
         $different = $this->Users->Bookmarks->find();
         $different
         ->contain(['Artists'])
-        ->select()
-        ->distinct()
         ->where(['artist_id NOT IN' => $sql])
-        ->andWhere(['user_id' => $id])
-        ->group(['artist_id']);
+        ->andWhere(['user_id' => $id]);
 
         $differents = $different->all();
 
