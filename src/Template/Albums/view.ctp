@@ -11,9 +11,9 @@
 	<figcaption>
 		Affiche de : <?= $album->title ?>
 		<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
-		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $album->id]); ?>
+		<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $album->id], ['class' => 'link_add icon pen']); ?>
 			<?php if (!empty($album->cover)) { ?>
-			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette album ?']); ?>
+			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette album ?', 'class' => 'link_add icon times']); ?>
 			<?php } ?>
 		<?php } ?>
 	</figcaption>
@@ -31,7 +31,7 @@
 	<?php if(!empty($album->style)) { echo $album->style; }else{ echo 'pas définie'; }  ?>
 </p>
 <div class="margin">
-	<a href="<?= $album->spotify ?>">Lien spotify</a>
+	<a href="<?= $album->spotify ?>" class="link_add"><i class="fab fa-spotify"></i> Lien spotify</a>
 </div>
 <p>
 	<?php 
@@ -50,7 +50,7 @@
 </p>
 <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
 	<div class="row text-center">
-		<?= $this->Html->link('Edit', ['action' => 'edit', $album->id], ['class' => 'col-3 link']); ?>
-		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette album ?', 'class' => 'col-3 link']); ?>
+		<?= $this->Html->link('Edit', ['action' => 'edit', $album->id], ['class' => 'col-3 link icon pen']); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $album->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette album ?', 'class' => 'col-3 link icon times']); ?>
 	</div>
 <?php } ?>

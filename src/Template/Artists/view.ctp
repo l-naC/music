@@ -11,9 +11,9 @@
 	<figcaption>
 		Affiche de : <?= $artist->pseudonym ?>
 		<?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
-			<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $artist->id]); ?>
+			<?= $this->Html->link('Edit Image', ['action' => 'edit_image', $artist->id], ['class' => 'link_add icon pen']); ?>
 			<?php if (!empty($artist->picture)) { ?>
-			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette artist ?']); ?>
+			<?= $this->Form->postLink('Supprimer', ['action' => 'delete_image', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer la photo de cette artist ?', 'class' => 'link_add icon times']); ?>
 			<?php } ?>
 		<?php } ?>
 	</figcaption>
@@ -21,9 +21,9 @@
 <?php if($auth->user()) { ?>
 <div class="margin">
 	<?php if (empty($bookmark)) { ?>
-		<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add']); ?>
+		<?= $this->Html->link('Ajouter en favori', ['controller' => 'bookmarks', 'action' => 'add', $artist->id], ['class' => 'link_add icon heart']); ?>
 	<?php }else{ ?>
-		<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+		<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?', 'class' => 'link_add icon times']); ?>
 	<?php } ?>
 </div>
 <?php } ?>
@@ -40,7 +40,7 @@
 	<?php if(!empty($artist->country)) { echo $artist->country; }else{ echo 'inconnue'; }  ?>
 </p>
 <div class="margin">
-	<a href="<?= $artist->spotify ?>">Lien spotify</a>
+	<a href="<?= $artist->spotify ?>" class="link_add"><i class="fab fa-spotify"></i> Lien spotify</a>
 </div>
 <p>
 	<?php 
@@ -61,7 +61,7 @@
 	<h2>Albums</h2>
 	<?php 
 	if(($auth->user()) && ($auth->user('status')) == 'admin') {
-		echo "<div class='margin'>".$this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id], ['class' => 'link_add'])."</div>"; 
+		echo "<div class='margin'>".$this->Html->link('Ajouter un album', ['controller' => 'albums', 'action' => 'add', $artist->id], ['class' => 'link_add icon plus'])."</div>"; 
 	} 
 	?>
 </div>
@@ -77,7 +77,7 @@ if (empty($artist->albums)) {
 
 <?php if(($auth->user()) && ($auth->user('status')) == 'admin') { ?>
 	<div class="row">
-		<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link']); ?>
-		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link']); ?>
+		<?= $this->Html->link('Edit', ['action' => 'edit', $artist->id], ['class' => 'col-3 link icon pen']); ?>
+		<?= $this->Form->postLink('Supprimer', ['action' => 'delete', $artist->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer cette artist ?', 'class' => 'col-3 link icon times']); ?>
 	</div>
 <?php } ?>

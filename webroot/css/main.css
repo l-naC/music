@@ -339,3 +339,28 @@ ul li figure figcaption a{
     border-radius: 50%;
     background: #26bece;
 }
+
+.icon:before{
+   font-family: "Font Awesome 5 Free";
+   display: inline-block;
+   padding-right: 6px;
+   vertical-align: middle;
+   font-weight: 900;
+   font-size: 1.2em;
+}
+.heart:before {
+   content: "\f004";
+}
+.times:before {
+   content: "\f00d";
+}
+.plus:before {
+   content: "\f067";
+}
+.pen:before {
+   content: "\f304";
+   font-size: 1em;
+}
+.check:before {
+   content: "\f00c";
+}

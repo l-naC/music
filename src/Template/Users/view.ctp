@@ -30,7 +30,7 @@
 				<figcaption>
 					<?= $bookmark->artist->pseudonym; ?>
 					<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
-						<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+						<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?', 'class' => 'link_add icon times']); ?>
 					<?php } ?>
 				</figcaption>
 			</figure>

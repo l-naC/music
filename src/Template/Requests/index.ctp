@@ -14,8 +14,8 @@
 		<td><?php echo $uneLigne->status ?></td>
 		<?php if($uneLigne->status == 'pending') { ?>
 		<td>
-			<?= $this->Form->postLink('Accepté', ['action' => 'accept', $uneLigne->id], ['class' => 'col-3 link']); ?>
-			<?= $this->Form->postLink('Refusé', ['action' => 'decline', $uneLigne->id], ['class' => 'col-3 link']); ?>
+			<?= $this->Form->postLink('', ['action' => 'accept', $uneLigne->id], ['class' => 'col-3 link icon check']); ?>
+			<?= $this->Form->postLink('', ['action' => 'decline', $uneLigne->id], ['class' => 'col-3 link icon times']); ?>
 		</td>
 		<?php } ?>
 	</tr>
