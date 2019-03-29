@@ -11,46 +11,48 @@
 	<?php echo $user->status; ?>
 </p>
 <h2>Favoris</h2> 
-<?php 
-foreach ($user->bookmarks as $bookmark): ?>
-<ul>
-	<li>
-		<figure>
-			<?php if (!empty($bookmark->artist->picture)) { ?>
-				<?= $this->Html->image('../data/pictures/'.$bookmark->artist->picture, ['alt' => 'Affiche de :'.$bookmark->artist->pseudonym]) ?>
-			<?php }else{ ?>
-				<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
-			<?php } ?>
-			<figcaption>
-				<?= $bookmark->artist->pseudonym; ?>
-				<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
-					<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
-				<?php } ?>
-			</figcaption>
-		</figure>
-			
-	</li>
-</ul>	
-<?php endforeach ?>
-
-<h2>Nuage de point des genres favoris</h2>
-<div id="cloud">
+<?php if (!empty($user->bookmarks)) { ?>
+	<?php foreach ($user->bookmarks as $bookmark): ?>
 	<ul>
-		<?php foreach ($style as $key => $value): ?>
-		<li><?= $value->style ?> : <?= $value->count ?> point(s)</li>
-		<?php endforeach ?>
-	</ul>
-	
-	<div>
-		<?php foreach ($style as $key => $value): ?>
+		<li>
+			<figure>
+				<?php if (!empty($bookmark->artist->picture)) { ?>
+					<?= $this->Html->image('../data/pictures/'.$bookmark->artist->picture, ['alt' => 'Affiche de :'.$bookmark->artist->pseudonym]) ?>
+				<?php }else{ ?>
+					<?= $this->Html->image('picture_default.png', ['alt' => 'Visuel non disponible']) ?>
+				<?php } ?>
+				<figcaption>
+					<?= $bookmark->artist->pseudonym; ?>
+					<?php if(($auth->user()) && ($auth->user('id')) == $user->id) { ?>
+						<?= $this->Form->postLink('Supprimer', ['controller' => 'bookmarks', 'action' => 'delete', $bookmark->id], ['confirm' => 'Etes-vous sûr de vouloir supprimer ce favori ?']); ?>
+					<?php } ?>
+				</figcaption>
+			</figure>
+				
+		</li>
+	</ul>	
+	<?php endforeach ?>
+
+	<h2>Nuage de point des genres favoris</h2>
+	<div id="cloud">
+		<ul>
+			<?php foreach ($style as $key => $value): ?>
+			<li><?= $value->style ?> : <?= $value->count ?> point(s)</li>
+			<?php endforeach ?>
+		</ul>
+		
 		<div>
-			<p id="point" style="width: <?= $value->count ?>0px; height: <?= $value->count ?>0px;"></p>
-			<p><?= $value->count ?></p>
+			<?php foreach ($style as $key => $value): ?>
+			<div>
+				<p id="point" style="width: <?= $value->count ?>0px; height: <?= $value->count ?>0px;"></p>
+				<p><?= $value->count ?></p>
+			</div>
+			<?php endforeach ?>
 		</div>
-		<?php endforeach ?>
 	</div>
-	
-</div>
+<?php }else{
+	echo "Aucun favori d'ajouté";
+} ?>
 
 <?php if(($auth->user()) && ($auth->user('id')) != $user->id) { ?>
 	<h2>Favoris en commun</h2>

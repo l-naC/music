@@ -8,12 +8,10 @@
 		<th>Created</th>
 		<th>Modified</th>
 	</tr>
-	<?php
-		$id = $auth->user('id');
-	?>
+	
 	<?php foreach ($users as $uneLigne) : ?>
 	<tr>
-		<td><?= $this->Html->link($uneLigne->pseudo, ['action' => 'view', $uneLigne->id, $id]); ?></td>
+		<td><?= $this->Html->link($uneLigne->pseudo, ['action' => 'view', $uneLigne->id]); ?></td>
 		<td><?= $uneLigne->status ?></td>
 		<td><?= $uneLigne->created->i18nFormat('dd/MM/yyyy') ?></td>
 		<td><?= $uneLigne->modified->i18nFormat('dd/MM/yyyy') ?></td>

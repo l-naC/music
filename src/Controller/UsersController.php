@@ -66,10 +66,14 @@ class UsersController extends AppController
         foreach ($bookmarks as $value){
             $bookmarks_array[] = $value->artist_id;
         }
-        $styles = $this->Users->Bookmarks->Artists->Albums->find()->where(['artist_id IN' => $bookmarks_array]);
-        $styles->select(['cover', 'title', 'style', 'count' => $styles->func()->count('*')])
-        ->group(['Albums.style']);
-        $style = $styles->all();
+        if (!empty($bookmarks_array)) {
+            $styles = $this->Users->Bookmarks->Artists->Albums->find()->where(['artist_id IN' => $bookmarks_array]);
+            $styles->select(['cover', 'title', 'style', 'count' => $styles->func()->count('*')])
+            ->group(['Albums.style']);
+            $style = $styles->all();
+        }
+        
+
         //SELECT * FROM albums WHERE artist_id IN (SELECT artist_id FROM bookmarks WHERE user_id = 1)
 
         $this->set(compact('user', 'bookmarks', 'commons', 'differents', 'style'));
